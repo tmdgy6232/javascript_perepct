@@ -5,7 +5,7 @@
 async function fetchUser(){
     // do network request in 10 secs.....
 
-    return 'seunghyo'
+    return 'seunghyo123'
 }
 
 const user = fetchUser();
