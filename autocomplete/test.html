@@ -15,12 +15,18 @@
 </head>
 <body><!-- 아래의 input의 값을 받을 때, 자동완성 기능이 작동합니다. -->
     <div class="srch_form autocomplete">
-        <input id="autoInput" placeholder="Search...">
+        <input id="autoInput" placeholder="Search..." onfocus="createAC(this, animal)">
+        <input id="autoInput" placeholder="Search..." onfocus="createAC(this, animal)">
+        <input id="autoInput" placeholder="Search..." onfocus="createAC(this, animal)">
     </div>
     <script>
         // autocomplete 부분을 생성
+        function createAC(elmnt, arr){
+            autocomplete.setAutocomplete(elmnt, animal);
+            console.log(elmnt);
+        }
         window.onload = function () {
-            autocomplete.setAutocomplete(document.getElementById("autoInput"), animal)
+            
         }
     </script>
 </body>
