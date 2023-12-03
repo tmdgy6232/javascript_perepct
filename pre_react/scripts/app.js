@@ -72,4 +72,26 @@ console.log(hobbies.map((item) => item + "test"));
 // 객체를 반환하고싶으면 중괄호를 소괄호로 감싸줘야한다.
 console.log(hobbies.map((item) => ({ key: item })));
 
-  
+  // 배열 및 객체의 분해
+const userNameData = ["Max", "Schwarzmuller"];
+
+// const firstName = userNameData[0];
+// const lastName = userNameData[1];
+
+// 분해문법 Arary
+const [firstName, lastName] = ["Max", "Schwarzmuller"];
+
+const user1 = {
+  name: "Max",
+  age: 34,
+};
+
+// const name = user.name
+// const age = user.age
+
+const { name: name1, age: age1 } = {
+  name: "Max",
+  age: 34,
+};
+
+console.log(name1);
