@@ -95,3 +95,23 @@ const { name: name1, age: age1 } = {
 };
 
 console.log(name1);
+
+// 전개연산자
+
+const likes = ["Sports", "Cooking"];
+
+const newLikes = ["Reading"];
+
+const totalLike = [...likes, ...newLikes];
+console.log(totalLike);
+
+const user2 = {
+  name: "Max",
+  age: 34,
+};
+
+const extendedUser = {
+  isAdmin: true,
+  ...user2,
+};
+console.log(extendedUser);
