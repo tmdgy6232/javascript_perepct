@@ -115,3 +115,39 @@ const extendedUser = {
   ...user2,
 };
 console.log(extendedUser);
+
+// Javascript Dom 조작하기
+const list = document.querySelector("ul");
+list.remove();
+
+// 함수에 함수를 값으로 전달할 수 있다.
+
+function handleTimeout() {
+    console.log("Time out !");
+  }
+  
+  const handleTimeout2 = () => {
+    console.log("Timed out .. . again!");
+  };
+  // 함수 전달할 때 () 실행 소괄호는 제외하고 이름만 보낸다 .
+  setTimeout(handleTimeout2);
+  
+  function greeter(greetFn) {
+    greetFn();
+  }
+  
+  greeter(() => {
+    console.log("test");
+  });
+  
+  // 함수안에 함수 정의하기
+  function init() {
+    function greet() {
+      console.log("Hi");
+    }
+  
+    greet();
+  }
+  
+  init();
+  
