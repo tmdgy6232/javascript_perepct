@@ -35,7 +35,7 @@ function App() {
       <ul id="concepts">
         {concepList}
       </ul>
-    </div>
+    </div> 
   );
 }
 
