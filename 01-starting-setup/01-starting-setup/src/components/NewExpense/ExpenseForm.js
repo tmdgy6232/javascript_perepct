@@ -20,9 +20,18 @@ const ExpenseForm = () => {
   };
   const amountChangeHandler = (event) => {
     //setEnteredAmount(event.target.value);
-    setUserInput({
-      ...userInput,
-      enteredAmount: event.target.value,
+    // 객체를 활용할 때 이 방법도 통하긴 하지만 이전 상태를 의존하게 될 위험이 있음.
+    // 기본적으로 상태변경을 '예약'하기 때문임.
+
+    // setUserInput({
+    //   ...userInput,
+    //   enteredAmount: event.target.value,
+    // });
+
+    // 그러므로 아래와 같이 셋팅함수 내부에서 함수를 즉시 실행시켜 변환시키는 방법이 더 좋음.
+    // 이 방법은 예약된 모든 상태 업데이트를 기억하고 이전 상태를 항상 최신상태로 리액트가 유지시켜줌
+    setUserInput((prevState) => {
+      return { ...prevState, enteredAmount: event.target.value };
     });
   };
   const dateChangeHandler = (event) => {
