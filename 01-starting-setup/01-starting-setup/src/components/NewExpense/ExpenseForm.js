@@ -50,17 +50,23 @@ const ExpenseForm = () => {
       setEnteredAmount(value);
     }
   };
+  const submitHandler = (event) => {
+    // form submit은 서버로 요청을 보내고 새로고침하게 되는데 그걸 막아주는 자바스크립트 매서드 사용.
+    event.preventDefault();
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+
+    console.log(expenseData);
+  };
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input
-            type="text"
-            onChange={(event) => {
-              inputChangeHandler("title", event.target.value);
-            }}
-          />
+          <input type="text" onChange={titleChangeHandler} />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
@@ -68,9 +74,7 @@ const ExpenseForm = () => {
             type="number"
             min="0.01"
             step="0.01"
-            onChange={(event) => {
-              inputChangeHandler("amount", event.target.value);
-            }}
+            onChange={amountChangeHandler}
           />
         </div>
         <div className="new-expense__control">
@@ -79,9 +83,7 @@ const ExpenseForm = () => {
             type="date"
             min="2019-01-01"
             nax="2023-12-31"
-            onChange={(event) => {
-              inputChangeHandler("date", event.target.value);
-            }}
+            onChange={dateChangeHandler}
           />
         </div>
       </div>
