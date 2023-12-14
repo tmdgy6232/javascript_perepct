@@ -26,7 +26,7 @@ function App() {
   ]);
   const addExpenseHandler = (expenseData) => {
     setExpense((prev) => {
-      return [...prev, expenseData];
+      return [expenseData, ...prev ];
     });
   };
 
