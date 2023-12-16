@@ -3,6 +3,7 @@ import "./Expenses.css";
 import Card from "../UI/Card";
 import ExpensesFilter from "./ExpensesFilter";
 import ExpensesList from "./ExpensesList";
+import ExpensesChart from "./ExpensesChart";
 
 const Expenses = (props) => {
   const [filterYear, setFilterYear] = useState("2020");
@@ -22,10 +23,10 @@ const Expenses = (props) => {
     setFilterYear(selectYear);
   };
 
-  const filteredExpense = props.items.filter(expense => {
-    return expense.date.getFullYear().toString() === filterYear
-  })
-  
+  const filteredExpense = props.items.filter((expense) => {
+    return expense.date.getFullYear().toString() === filterYear;
+  });
+
   return (
     <div>
       <Card className="expenses">
@@ -36,8 +37,8 @@ const Expenses = (props) => {
         <p style={{ color: "white" }}>
           Data for years {filterInfoText} is hidden.
         </p>
-
-        <ExpensesList items={filteredExpense}/>
+        <ExpensesChart expenses={filteredExpense} />
+        <ExpensesList items={filteredExpense} />
         {/* {filteredExpense.length === 0 && <p>No expenses found</p>}
         {filteredExpense.length > 0 && filteredExpense.map((item) => (
           <ExpenseItem
@@ -57,7 +58,6 @@ const Expenses = (props) => {
             date={item.date}
           />
         ))} */}
-        
       </Card>
     </div>
   );
