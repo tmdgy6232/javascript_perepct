@@ -1,3 +1,10 @@
+const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 const ResultsTable = (props) => {
   return (
     <table className="result">
@@ -12,12 +19,22 @@ const ResultsTable = (props) => {
       </thead>
       <tbody>
         {props.yearlyData.map((data) => (
-          <tr>
+          <tr key={data.year}>
             <td>{data.year}</td>
-            <td>{data.yearlyInterest}</td>
-            <td>{data.savingsEndOfYear}</td>
-            <td>{data.yearlyContribution}</td>
-            <td>TOTAL INVESTED CAPITAL</td>
+            <td>{formatter.format(data.savingsEndOfYear)}</td>
+            <td>{formatter.format(data.yearlyInterest)}</td>
+            <td>
+              {formatter.format(
+                data.savingsEndOfYear -
+                  props.initialInvestment -
+                  data.yearlyContribution * data.year
+              )}
+            </td>
+            <td>
+              {formatter.format(
+                props.initialInvestment + data.yearlyContribution * data.year
+              )}
+            </td>
           </tr>
         ))}
       </tbody>
