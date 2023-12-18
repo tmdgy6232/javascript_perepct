@@ -1,13 +1,29 @@
-const UserInput = () => {
+import { useState } from "react";
+
+const initialUserInput = {
+  "current-savings": 10000,
+  "yearly-contribution": 1200,
+  "expected-return": 7,
+  duration: 10,
+};
+
+const UserInput = (props) => {
+  const [userInput, setUserInput] = useState(initialUserInput);
   const submitHandler = (event) => {
     // form submit 하여 페이지 리로드하는것을 방지
     event.preventDefault();
+    props.onCaculate(userInput);
   };
 
-  const resetHandler = () => {};
+  const resetHandler = () => {
+    setUserInput(initialUserInput);
+  };
 
   const changeHandler = (input, value) => {
-    console.log(input);
+    setUserInput((prev) => {
+      // Object Key 동적할당 할때에는 key를 대문자로 감싸주는 문법을 사용한다
+      return { ...prev, [input]: value };
+    });
   };
   return (
     <form onSubmit={submitHandler} className="form">
@@ -18,6 +34,7 @@ const UserInput = () => {
             onChange={(event) =>
               changeHandler(event.target.id, event.target.value)
             }
+            value={userInput["current-savings"]}
             type="number"
             id="current-savings"
           />
@@ -28,6 +45,7 @@ const UserInput = () => {
             onChange={(event) =>
               changeHandler(event.target.id, event.target.value)
             }
+            value={userInput["yearly-contribution"]}
             type="number"
             id="yearly-contribution"
           />
@@ -42,6 +60,7 @@ const UserInput = () => {
             onChange={(event) =>
               changeHandler(event.target.id, event.target.value)
             }
+            value={userInput["expected-return"]}
             type="number"
             id="expected-return"
           />
@@ -52,6 +71,7 @@ const UserInput = () => {
             onChange={(event) =>
               changeHandler(event.target.id, event.target.value)
             }
+            value={userInput["duration"]}
             type="number"
             id="duration"
           />
