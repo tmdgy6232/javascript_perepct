@@ -1,14 +1,36 @@
 const UserInput = () => {
+  const submitHandler = (event) => {
+    // form submit 하여 페이지 리로드하는것을 방지
+    event.preventDefault();
+  };
+
+  const resetHandler = () => {};
+
+  const changeHandler = (input, value) => {
+    console.log(input);
+  };
   return (
-    <form className="form">
+    <form onSubmit={submitHandler} className="form">
       <div className="input-group">
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
-          <input type="number" id="current-savings" />
+          <input
+            onChange={(event) =>
+              changeHandler(event.target.id, event.target.value)
+            }
+            type="number"
+            id="current-savings"
+          />
         </p>
         <p>
           <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
-          <input type="number" id="yearly-contribution" />
+          <input
+            onChange={(event) =>
+              changeHandler(event.target.id, event.target.value)
+            }
+            type="number"
+            id="yearly-contribution"
+          />
         </p>
       </div>
       <div className="input-group">
@@ -16,15 +38,27 @@ const UserInput = () => {
           <label htmlFor="expected-return">
             Expected Interest (%, per year)
           </label>
-          <input type="number" id="expected-return" />
+          <input
+            onChange={(event) =>
+              changeHandler(event.target.id, event.target.value)
+            }
+            type="number"
+            id="expected-return"
+          />
         </p>
         <p>
           <label htmlFor="duration">Investment Duration (years)</label>
-          <input type="number" id="duration" />
+          <input
+            onChange={(event) =>
+              changeHandler(event.target.id, event.target.value)
+            }
+            type="number"
+            id="duration"
+          />
         </p>
       </div>
       <p className="actions">
-        <button type="reset" className="buttonAlt">
+        <button onClick={resetHandler} type="reset" className="buttonAlt">
           Reset
         </button>
         <button type="submit" className="button">
