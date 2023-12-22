@@ -35,42 +35,44 @@ const Login = (props) => {
 
   const [emailState, dispatchEamil] = useReducer(emailReducer, {
     value: "",
-    isValid: false,
+    isValid: null,
   });
 
   const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
     value: "",
-    isValid: false,
+    isValid: null,
   });
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     console.log("excution Func!");
-  //     setFormIsValid(
-  //       enteredEmail.includes("@") && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
-  //   // 첫번째 인자로 리턴하는 함수를 먼저 실행하고, 본문 함수를 실행한다. 그걸 클린업 함수라 한다.
-  //   return () => {
-  //     console.log("cleanup");
-  //     clearTimeout(timer);
-  //   };
-  // }, [enteredEmail, enteredPassword]);
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsValid } = passwordState;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      console.log("excution Func!");
+      setFormIsValid(
+        emailState.value.includes("@") && passwordState.value.trim().length > 6
+      );
+    }, 500);
+    // 첫번째 인자로 리턴하는 함수를 먼저 실행하고, 본문 함수를 실행한다. 그걸 클린업 함수라 한다.
+    return () => {
+      console.log("cleanup");
+      clearTimeout(timer);
+    };
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEamil({
       type: "USER_INPUT",
       val: event.target.value,
     });
-    setFormIsValid(
-      event.target.value.includes("@") && passwordState.value.trim().length > 6
-    );
+    // setFormIsValid(
+    //   event.target.value.includes("@") && passwordState.value.trim().length > 6
+    // );
   };
 
   const passwordChangeHandler = (event) => {
     dispatchPassword({ type: "PASSWORD_INPUT", val: event.target.value });
 
-    setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
+    // setFormIsValid(emailState.isValid && event.target.value.trim().length > 6);
   };
 
   const validateEmailHandler = () => {
