@@ -1,0 +1,2 @@
+useMemo Example Code location
+https://github.com/academind/react-complete-guide-code/blob/12-a-look-behind-the-scenes/code/07-finished/src/App.js
