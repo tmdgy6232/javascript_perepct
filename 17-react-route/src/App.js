@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     children: [
-      { path: "/", element: <HomePage /> },
+      { index: true, element: <HomePage /> }, // path / 를 안하고 빈값을 설정하지 않아도 인덱스 라우트를 설정하면 부모 라우트가 활성화 되었을 때 자동으로 제일 먼저 실행된다.
       { path: "/products", element: <ProductPage /> },
       { path: "/products/:productId", element: <ProductDetailPage /> },
     ],
