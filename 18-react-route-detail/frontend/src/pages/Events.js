@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, json } from "react-router-dom";
 import EventsList from "../components/EventsList";
 
 function EventsPage() {
@@ -12,7 +12,7 @@ function EventsPage() {
 export default EventsPage;
 
 export async function loader() {
-  const response = await fetch("http://localhost:8080/events111");
+  const response = await fetch("http://localhost:8080/events");
 
   if (!response.ok) {
     // ...
@@ -20,9 +20,10 @@ export async function loader() {
     //   isError: true,
     //   message: "Could not fetch events.",
     // };
-    throw new Response(JSON.stringify({ message: "Could not fetch events" }), {
-      status: 500,
-    });
+    // throw new Response(JSON.stringify({ message: "Could not fetch events" }), {
+    //   status: 500,
+    // });
+    return json({ message: "Could not fetch events" }, { status: 500 });
   } else {
     // useLoaderData는 fetch가 Promise<Response> 타입을 리턴하기때문에
     // 그에맞게 Response 객체 자체를 전달해도 안에 데이터를 추출해서 전달해준다.
