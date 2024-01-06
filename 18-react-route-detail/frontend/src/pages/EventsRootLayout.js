@@ -4,7 +4,9 @@ function EventsRootLayout() {
   return (
     <>
       <EventsNavigation />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </>
   );
 }
