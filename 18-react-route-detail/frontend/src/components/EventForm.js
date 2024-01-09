@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Form } from "react-router-dom";
 
 import classes from "./EventForm.module.css";
 
@@ -7,9 +7,12 @@ function EventForm({ method, event }) {
   function cancelHandler() {
     navigate("..");
   }
-
+  /**
+   * react-router-dom의 Form 컴포넌트를 사용하면
+   * 벡엔드로 바로 전송하지 않고 라우트의 action에 지정된 함수를 실행하여 액션을 취해준다.
+   */
   return (
-    <form className={classes.form}>
+    <Form method="post" className={classes.form}>
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -56,7 +59,7 @@ function EventForm({ method, event }) {
         </button>
         <button>Save</button>
       </div>
-    </form>
+    </Form>
   );
 }
 
