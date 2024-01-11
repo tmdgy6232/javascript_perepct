@@ -1,10 +1,17 @@
-import { useNavigate, Form, useNavigation } from "react-router-dom";
+import {
+  useNavigate,
+  Form,
+  useNavigation,
+  useActionData,
+} from "react-router-dom";
 
 import classes from "./EventForm.module.css";
 
 function EventForm({ method, event }) {
   const navigate = useNavigate();
   const navigation = useNavigation();
+  // 액션에 대한 리턴데이터 여기에서는 newEventPage의 action 함수의 response가 된다.
+  const data = useActionData();
 
   // router가 데이터를 제출하고 있다면 useNavigation hook에서 state가 submitting인지 확인해보면 알 수 있따.
   const isSubmitting = navigation.state === "submitting";
@@ -18,6 +25,13 @@ function EventForm({ method, event }) {
    */
   return (
     <Form method="post" className={classes.form}>
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
       <p>
         <label htmlFor="title">Title</label>
         <input
