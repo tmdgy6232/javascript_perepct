@@ -14,6 +14,8 @@ export default function NewEventsSection() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["events"],
     queryFn: fetchEvents,
+    staleTime: 5000, // 캐시데이터를 사용하지만 자체적으로 데이터가 업데이트 되었는지 확인하기 위해 쿼리를 재실행할 시간
+    // gcTime: 30000, // 데이터와 캐시를 얼마나 오래 보관할지 정함 default 5분
   });
   let content;
 
