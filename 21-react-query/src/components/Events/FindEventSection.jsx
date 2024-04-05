@@ -7,18 +7,20 @@ import EventItem from "./EventItem.jsx";
 
 export default function FindEventSection() {
   const searchElement = useRef();
-  const [searchTerm, setSearchTerm] = useState("");
-  const { data, isPending, isError, error } = useQuery({
+  const [searchTerm, setSearchTerm] = useState();
+  const { data, isPending, isLoading, isError, error } = useQuery({
     queryKey: ["events", { search: searchTerm }],
     queryFn: ({ signal }) => fetchEvents({ signal, searchTerm }),
+    enabled: searchTerm !== undefined, // 검색어 없을 때 요청 안보내게 하는 속성
   });
+
   function handleSubmit(event) {
     event.preventDefault();
     setSearchTerm(searchElement.current.value);
   }
   let content = <p>Please enter a search term and to find events</p>;
 
-  if (isPending) {
+  if (isLoading) {
     content = <LoadingIndicator />;
   }
 
