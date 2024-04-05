@@ -1,9 +1,11 @@
-// 리액트 데이터 가져오는중에 사용자가 페이지를 나가거나 하면 signal을 통해 요청을 취소할 수 있따.
 export async function fetchEvents({ signal, searchTerm }) {
+  console.log(searchTerm);
   let url = "http://localhost:3000/events";
+
   if (searchTerm) {
     url += "?search=" + searchTerm;
   }
+
   const response = await fetch(url, { signal: signal });
 
   if (!response.ok) {
@@ -16,4 +18,25 @@ export async function fetchEvents({ signal, searchTerm }) {
   const { events } = await response.json();
 
   return events;
+}
+
+export async function createNewEvent(eventData) {
+  const response = await fetch(`http://localhost:3000/events`, {
+    method: "POST",
+    body: JSON.stringify(eventData),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    const error = new Error("An error occurred while creating the event");
+    error.code = response.status;
+    error.info = await response.json();
+    throw error;
+  }
+
+  const { event } = await response.json();
+
+  return event;
 }
