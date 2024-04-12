@@ -15,7 +15,12 @@ export default function EventDetails() {
   const { mutate } = useMutation({
     mutationFn: deleteEvent,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["events"] });
+      // 기술적으로 invalidateQueries로 캐시 다 날리면 계속 조회하기 때문에 navigate를 호출하기 전까지 404에러가 발생한다.
+      queryClient.invalidateQueries({
+        queryKey: ["events"],
+        refetchType: "none", // 리프레시 타입을 none으로 지정함으로써 쿼리가 즉시 다시 트리거되지 않게 한다.
+      });
+
       navigate("/events");
     },
   });
